@@ -1,1 +1,36 @@
 
+<!DOCTYPE html>
+<html lang="tg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Yasmina Kids | Каталоги оптом</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#faf7f3;color:#342a29;font-family:Arial,sans-serif}header{background:#fff;padding:20px;text-align:center;box-shadow:0 2px 12px #0001}h1{font-family:Georgia,serif;font-size:32px;margin:0;color:#9b6a55}.sub{color:#89766d;font-size:13px;margin:8px}main{padding:18px;max-width:900px;margin:auto}.hero{background:#e9d8cc;border-radius:20px;padding:28px 18px;text-align:center;margin-bottom:22px}.hero h2{font-family:Georgia,serif;font-size:26px}.hero p{line-height:1.6}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.item{background:white;border-radius:16px;padding:14px;box-shadow:0 3px 12px #0001}.photo{height:110px;background:#f4ebe5;border-radius:12px;display:grid;place-items:center;font-size:45px}.item h3{font-size:15px}.item p{font-size:12px;color:#776c67}.item button,.order{background:#9b6a55;color:white;border:0;padding:12px;border-radius:10px;width:100%;font-weight:bold}#cart{background:white;padding:18px;border-radius:18px;margin-top:25px}.order{margin-top:12px}footer{text-align:center;padding:25px;color:#88766c;font-size:12px}
+</style>
+</head>
+<body>
+<header><h1>Yasmina Kids</h1><div class="sub">Либосҳои кӯдакона • Фурӯши яклухт</div></header>
+<main>
+<section class="hero"><h2>Коллексияи кӯдакона</h2><p>Либосҳои зебо барои кӯдакон<br>Оптом • Ростовка • Поштучно</p></section>
+<h2>Каталоги маҳсулот</h2>
+<div class="grid" id="products"></div>
+<section id="cart"><h2>🛒 Корзина (<span id="count">0</span>)</h2><div id="items">Ҳоло холӣ аст</div><button class="order" onclick="sendOrder()">Фармоиш тавассути Telegram</button></section>
+</main>
+<footer>© Yasmina Kids • Тоҷикистон</footer>
+<script>
+const products=[
+{name:"Спортивка",icon:"👕"},
+{name:"Куртка",icon:"🧥"},
+{name:"Либоси духтарона",icon:"👗"},
+{name:"Либоси мактабӣ",icon:"🎒"}
+];
+let cart=[];
+document.getElementById("products").innerHTML=products.map((p,i)=>'<div class="item"><div class="photo">'+p.icon+'</div><h3>'+p.name+'</h3><p>Ранг, размер ва нарх: муайян мешавад</p><button onclick="add('+i+')">Ба корзина +</button></div>').join("");
+function add(i){cart.push(products[i].name);render()}
+function render(){document.getElementById("count").textContent=cart.length;document.getElementById("items").innerHTML=cart.length?cart.map((x,i)=>'<p>'+x+' <button onclick="removeItem('+i+')" style="width:auto">✕</button></p>').join(""):"Ҳоло холӣ аст"}
+function removeItem(i){cart.splice(i,1);render()}
+function sendOrder(){if(!cart.length){alert("Аввал маҳсулот интихоб кунед");return}const msg="Салом! Ман аз Yasmina Kids фармоиш додан мехоҳам:\n"+cart.map((x,i)=>(i+1)+". "+x).join("\n");navigator.clipboard.writeText(msg).then(()=>alert("Фармоиш нусха шуд. Онро ба Telegram фиристед.")).catch(()=>alert(msg));window.open("https://t.me/YasminaKidsTJ_bot","_blank")}
+</script>
+</body>
+</html>
